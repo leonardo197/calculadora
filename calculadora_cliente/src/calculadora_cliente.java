@@ -8,8 +8,8 @@ import java.util.Scanner;
 
 public class calculadora_cliente {
     public static void main(String[] args) throws IOException {
-        String hostName = "192.168.1.5";
-        int portNumber = 10002;
+        String hostName = "127.0.0.1";//args[0];//127.0.0.1
+        int portNumber = 10005;
         Scanner teclado = new Scanner(System.in);
         System.out.println("                              Calculadora");
         System.out.print("Server ip: ");

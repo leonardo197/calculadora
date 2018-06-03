@@ -1,3 +1,4 @@
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,37 +15,32 @@ public class calculadora implements Runnable{
     public void run(){
         System.out.println("Nova conexao com o cliente " + this.cliente.getInetAddress().getHostAddress());
 
-        try {
+        try (
             PrintWriter out = new PrintWriter(this.cliente.getOutputStream(), true);
-            BufferedReader in = new BufferedReader(new InputStreamReader(this.cliente.getInputStream()));{
-//-------------------
+            BufferedReader in = new BufferedReader(new InputStreamReader(this.cliente.getInputStream()));) {
 
-                do {
-                    String inputLine, outputLine;
-                    inputLine = in.readLine();
-                    System.out.println("Client: " + inputLine);
 
-                        System.out.println("server: " + inputLine);
-                    outputLine = ("server: " + inputLine);
-                    out.println(outputLine);
-                    if (inputLine.equals("by")) {
-                        break;
-                    }
-                } while (true);
 
-//------------
+            do {
+                String inputLine, outputLine;
 
-            }
-            Scanner s = null;
-            s = new Scanner(this.cliente.getInputStream());
 
-            //Exibe mensagem no console
-            while(s.hasNextLine()){
-                //cod
-            }
+                inputLine = in.readLine();
+                System.out.println("Client: " + inputLine);
+                    System.out.println("server: " + inputLine);
+                outputLine = ("server: " + inputLine);
+                out.println(outputLine);
+                if (inputLine.equals("by")) {
+                    break;
+                }
+            } while (true);
 
-            //Finaliza objetos
-            s.close();
+
+            System.out.println("Fim do Serviso!");
+
+
+
+
             this.cliente.close();
         } catch (IOException e) {
             e.printStackTrace();
