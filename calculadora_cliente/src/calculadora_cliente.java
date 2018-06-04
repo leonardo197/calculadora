@@ -11,7 +11,7 @@ public class calculadora_cliente {
         String hostName = "127.0.0.1";//args[0];//127.0.0.1
         int portNumber = 10005;
         Scanner teclado = new Scanner(System.in);
-        System.out.println("                              Calculadora");
+        //System.out.println("                              Calculadora");
         System.out.print("Server ip: ");
         //hostName=teclado.next().toString();
         System.out.println();
@@ -20,20 +20,22 @@ public class calculadora_cliente {
         System.out.println();
 
         try (
-                Socket kkSocket = new Socket(hostName, portNumber);
-                PrintWriter out = new PrintWriter(kkSocket.getOutputStream(), true);
-                BufferedReader in = new BufferedReader(new InputStreamReader(kkSocket.getInputStream()));) {
+                Socket Socket = new Socket(hostName, portNumber);
+                PrintWriter out = new PrintWriter(Socket.getOutputStream(), true);
+                BufferedReader in = new BufferedReader(new InputStreamReader(Socket.getInputStream()));) {
             BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
             String fromServer;
             String fromUser;
 
-
+            fromServer=in.readLine();
+            System.out.println("Server: " + fromServer);
             do {
                 fromUser = stdIn.readLine();
                 System.out.println("Client: " + fromUser);
                 out.println(fromUser);
                 fromServer=in.readLine();
                 System.out.println("Server: " + fromServer);
+
 
                 if(fromUser.equals("by")){break;}
             }while (true);

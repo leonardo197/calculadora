@@ -1,15 +1,15 @@
 public class calculos {
-
-    public int som(int num1, int num2) {
+public void calculos(){};
+    public float som(float num1, float num2) {
         return num1 + num2;
     }
-    public int sub(int num1, int num2){
+    public float sub(float num1, float num2){
         return num1 - num2;
     }
-    public int div(int num1,int num2){
+    public float div(float num1,float num2){
         return num1 / num2;
     }
-    public int mult(int num1, int num2){
+    public float mult(float num1, float num2){
         return num1 * num2;
     }
 }
