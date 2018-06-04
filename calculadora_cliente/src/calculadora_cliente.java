@@ -29,6 +29,8 @@ public class calculadora_cliente {
 
             fromServer=in.readLine();
             System.out.println("Server: " + fromServer);
+            fromServer=in.readLine();
+            System.out.println("Server: " + fromServer);
             do {
                 fromUser = stdIn.readLine();
                 System.out.println("Client: " + fromUser);

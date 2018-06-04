@@ -22,9 +22,9 @@ public class calculadora implements Runnable{
             PrintWriter out = new PrintWriter(this.cliente.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(this.cliente.getInputStream()));) {
             String inputLine, outputLine;
-            //outputLine="                              Calculadora\n";
-            //System.out.println("server: " + outputLine);
-            //out.println(outputLine);
+            outputLine="                              Calculadora";
+            System.out.println("server: " + outputLine);
+            out.println(outputLine);
 
 
             do {
