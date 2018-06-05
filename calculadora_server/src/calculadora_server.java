@@ -12,6 +12,7 @@ public class calculadora_server {
         System.out.println("Aguardando conexão do cliente...");
 
         while (true) {
+
             Socket cliente = servidor.accept();
             // Cria uma thread do servidor para tratar a conexão
             calculadora tratamento = new calculadora(cliente);

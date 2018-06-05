@@ -33,12 +33,12 @@ public class calculadora_cliente {
             do {
                 fromServer = in.readLine();
                 System.out.println("Server: " + fromServer);
-                //--------resposta
-                if(fromServer.matches("^[0-9]*[.]{0,1}[0-9]*$")){
+                //----------resposta
+                if(fromServer.matches("^[0-9]*[,]{0,1}[0-9]*$")){
                     fromServer = in.readLine();
                     System.out.println("Server: " + fromServer);
                 }
-                //-------fim da conexão
+                //--------fim da conexão
                 if (fromServer.equals("by")) {
                     break;
                 }
