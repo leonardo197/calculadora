@@ -10,6 +10,7 @@ public class calculadora_cliente {
     public static void main(String[] args) throws IOException {
         String hostName = "127.0.0.1";//args[0];//127.0.0.1
         int portNumber = 10005;
+        String memoria = "n";
         Scanner teclado = new Scanner(System.in);
         //System.out.println("                              Calculadora");
         System.out.print("Server ip: ");
@@ -27,20 +28,25 @@ public class calculadora_cliente {
             String fromServer;
             String fromUser;
 
-            fromServer=in.readLine();
-            System.out.println("Server: " + fromServer);
-            fromServer=in.readLine();
+            fromServer = in.readLine();
             System.out.println("Server: " + fromServer);
             do {
+                fromServer = in.readLine();
+                System.out.println("Server: " + fromServer);
+                //--------resposta
+                if(fromServer.matches("^[0-9]*[.]{0,1}[0-9]*$")){
+                    fromServer = in.readLine();
+                    System.out.println("Server: " + fromServer);
+                }
+                //-------fim da conexão
+                if (fromServer.equals("by")) {
+                    break;
+                }
                 fromUser = stdIn.readLine();
                 System.out.println("Client: " + fromUser);
                 out.println(fromUser);
-                fromServer=in.readLine();
-                System.out.println("Server: " + fromServer);
 
-
-                if(fromUser.equals("by")){break;}
-            }while (true);
+            } while (true);
 
 
         } catch (UnknownHostException e) {
