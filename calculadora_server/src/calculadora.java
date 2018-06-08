@@ -5,7 +5,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.text.DecimalFormat;
-import java.util.Scanner;
 
 public class calculadora implements Runnable {
     public Socket cliente;
@@ -35,11 +34,11 @@ public class calculadora implements Runnable {
                     //-------------------primeiro
                     if (memoria.equals("n")) {
                         try {
-                            outputLine = "                Insira um numero:";
+                            outputLine = "                Insira numero:";
                             System.out.println("server: " + outputLine);
                             out.println(outputLine);
                             inputLine = in.readLine();
-                            System.out.println("Client: " +cliente.getRemoteSocketAddress()+" Diz "+ inputLine);
+                            System.out.println("Client: " + cliente.getRemoteSocketAddress() + " Diz " + inputLine);
                             this.v1 = Float.parseFloat(inputLine);
                             break;
                         } catch (NumberFormatException e) {
@@ -51,29 +50,29 @@ public class calculadora implements Runnable {
                 do {
                     //-------------------operador
                     try {
-                        outputLine = "                Insira um operador :";
+                        outputLine = "                Insira operador :";
                         System.out.println("server: " + outputLine);
                         out.println(outputLine);
                         inputLine = in.readLine();
-                        System.out.println("Client: "+cliente.getRemoteSocketAddress()+" Diz " + inputLine);
+                        System.out.println("Client: " + cliente.getRemoteSocketAddress() + " Diz " + inputLine);
                         this.operador = inputLine;
-                        if (this.operador.equals("som") || this.operador.equals("sub") || this.operador.equals("div") || this.operador.equals("mult")||
-                        this.operador.equals("pow") || this.operador.equals("fat") || this.operador.equals("sin") || this.operador.equals("cos") ||
-                        this.operador.equals("cos"))
+                        if (this.operador.equals("som") || this.operador.equals("sub") || this.operador.equals("div") || this.operador.equals("mul") ||
+                                this.operador.equals("pow") || this.operador.equals("fat") || this.operador.equals("sin") || this.operador.equals("cos") ||
+                                this.operador.equals("cos"))
                             break;
                     } catch (NumberFormatException e) {
                         System.out.println("Operador com formato errado!");
                     }
                 } while (true);
-                if (this.operador.equals("som") || this.operador.equals("sub") || this.operador.equals("div") || this.operador.equals("mult")) {
+                if (this.operador.equals("som") || this.operador.equals("sub") || this.operador.equals("div") || this.operador.equals("mul")) {
                     do {
                         //-------------------segundo
                         try {
-                            outputLine = "                Insira segundo numero:";
+                            outputLine = "                Insira numero:";
                             System.out.println("server: " + outputLine);
                             out.println(outputLine);
                             inputLine = in.readLine();
-                            System.out.println("Client: " +cliente.getRemoteSocketAddress()+" Diz "+ inputLine);
+                            System.out.println("Client: " + cliente.getRemoteSocketAddress() + " Diz " + inputLine);
                             this.v2 = Float.parseFloat(inputLine);
                             break;
                         } catch (NumberFormatException e) {
@@ -83,28 +82,35 @@ public class calculadora implements Runnable {
                 }
 //-----------------------operador
                 try {
-                    switch (operador) {
+                    switch (this.operador) {
                         case "som":
                             this.t = c.som(this.v1, this.v2);
+                            break;
                         case "sub":
                             this.t = c.sub(this.v1, this.v2);
+                            break;
                         case "div":
                             this.t = c.div(this.v1, this.v2);
-                        case "mult":
+                            break;
+                        case "mul":
                             this.t = c.mult(this.v1, this.v2);
+                            break;
                         case "pow":
                             this.t = (float) c.pow(this.v1, this.v2);
+                            break;
                         case "fat":
                             this.t = c.fatorial(v1);
+                            break;
                         case "sin":
                             this.t = (float) c.sin(v1);
+                            break;
                         case "cos":
                             this.t = (float) c.cos(v1);
+                            break;
                         case "tan":
                             this.t = (float) c.tan(v1);
+                            break;
                     }
-
-
                     outputLine = "" + formatter.format(this.t);
                     System.out.println("server: " + outputLine);
                     out.println(outputLine);
@@ -112,37 +118,47 @@ public class calculadora implements Runnable {
                     System.out.println("Erro na operação!!!");
                 }
                 //--------------------------pergunta se quer Continuar
-                outputLine = "                Continuar a calcular??(s)(n)";
-                System.out.println("server: " + outputLine);
-                out.println(outputLine);
-                inputLine = in.readLine();
-                System.out.println("Client: "+cliente.getRemoteSocketAddress()+" Diz " + inputLine);
-                if (inputLine.equals("n") || inputLine.equals("N")) {
-                    outputLine = "by";
+                do {
+                    outputLine = "                Continuar a calcular??(s)(n)";
                     System.out.println("server: " + outputLine);
                     out.println(outputLine);
+                    inputLine = in.readLine();
+                    System.out.println("Client: " + cliente.getRemoteSocketAddress() + " Diz " + inputLine);
+                    if (inputLine.equals("n") || inputLine.equals("N")) {
+                        outputLine = "by";
+                        System.out.println("server: " + outputLine);
+                        out.println(outputLine);
+                    }
+                    if (inputLine.equals("n") || inputLine.equals("N") || inputLine.equals("s") || inputLine.equals("S")) {
+                        break;
+                    }
+                } while (true);
+                if (inputLine.equals("n") || inputLine.equals("N")) {
                     break;
                 }
                 //--------------------------pergunta se quer Continuar com memoria
-                outputLine = "                guardar valor na memória?(s)(n)";
-                System.out.println("server: " + outputLine);
-                out.println(outputLine);
-                inputLine = in.readLine();
-                System.out.println("Client: " +cliente.getRemoteSocketAddress()+" Diz "+ inputLine);
-                if (inputLine.equals("s") || inputLine.equals("S")) {
-                    this.v1 = this.t;
-                    this.memoria = "s";
-                }
-
+                do {
+                    outputLine = "                guardar valor na memória?(s)(n)";
+                    System.out.println("server: " + outputLine);
+                    out.println(outputLine);
+                    inputLine = in.readLine();
+                    System.out.println("Client: " + cliente.getRemoteSocketAddress() + " Diz " + inputLine);
+                    if (inputLine.equals("s") || inputLine.equals("S")) {
+                        this.v2 = this.t;
+                        this.v1 = this.t;
+                        this.memoria = "s";
+                        break;
+                    } else {
+                        this.v2 = 0;
+                        this.v1 = 0;
+                        this.memoria = "n";
+                        break;
+                    }
+                } while (true);
             } while (true);
-
             this.cliente.close();
         } catch (IOException e) {
-            // e.printStackTrace();
         }
-            System.out.println("Fim do Serviso!");
-
-
-
+        System.out.println("Fim do Serviso!");
     }
 }

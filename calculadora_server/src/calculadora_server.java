@@ -8,11 +8,8 @@ public class calculadora_server {
         System.out.println("                              Calculadora Server");
         ServerSocket servidor = new ServerSocket(10005);
         System.out.println("Porta 12345 aberta!");
-
         System.out.println("Aguardando conexão do cliente...");
-
         while (true) {
-
             Socket cliente = servidor.accept();
             // Cria uma thread do servidor para tratar a conexão
             calculadora tratamento = new calculadora(cliente);
